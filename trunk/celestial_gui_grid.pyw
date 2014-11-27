@@ -588,7 +588,7 @@ class TablesPDF:
         data.append(header)
         header = ['', '°   ´', '°   ´', '° ´', '° ´', '° ´', '° ´', '° ´', '° ´', '° ´', '° ´', '° ´', '° ´']
         data.append(header)
-        for year in range(self.epoch.tuple()[0]-4, self.epoch.tuple()[0]+5):
+        for year in range(self.epoch-4, self.epoch+5):
             if year == self.epoch:
                 data.append('')
             data_row = [year]
@@ -596,7 +596,7 @@ class TablesPDF:
                 gha_observer.date = ephem.date((year,month))
                 gha = ephem.degrees(gha_observer.sidereal_time())
                 # gather data for the example
-                if month == 8 and year == self.epoch.tuple()[0]+2:
+                if month == 8 and year == self.epoch+2:
                     example = gha
                 gha_ddd = int(gha*180/pi)
                 gha_mm = round(((gha*180/pi)-gha_ddd)*60)
@@ -738,7 +738,7 @@ class TablesPDF:
         p = Paragraph('', self.style)
         Story.append(p)
         Story[-1].latitude = None
-        p = Paragraph('<b>TABLE 4 - GHA Aries FOR THE YEARS '+str(self.epoch.tuple()[0]-4)+'-'+str(self.epoch.tuple()[0]+4)+'</b>', self.styleCentered)
+        p = Paragraph('<b>TABLE 4 - GHA Aries FOR THE YEARS '+str(self.epoch-4)+'-'+str(self.epoch+4)+'</b>', self.styleCentered)
         Story.append(p)
         Story.append(Spacer(0,inch/5))
         p = Paragraph('a. GHA Aries AT 00<super>h</super> ON THE FIRST DAY OF EACH MONTH', self.styleCentered)
@@ -763,7 +763,7 @@ class TablesPDF:
         Story.append(table)
         Story.append(Spacer(0,inch/10))
         text = '<i>Example.</i> The value of GHA Aries for '\
-               +str(self.epoch.tuple()[0]+2)+\
+               +str(self.epoch+2)+\
                ' August 17 at 05<super>h</super> 11<super>m</super> 41<super>s</super> UT is (<b>a</b>) '\
                +self.__get_str_degrees(example_a)+\
                '+ (<b>b</b>) '\
